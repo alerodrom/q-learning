@@ -1,5 +1,5 @@
 # from medium_qlearning_env import Env
-from qlearning.enviroment import Environment
+from enviroment import Environment
 import numpy as np
 import time
 import os
@@ -10,7 +10,7 @@ env = Environment()
 # QTable : contains the Q-Values for every (state,action) pair
 qtable = np.zeros([env.state_count, env.action_count]) # np.random.rand(env.state_count, env.action_count).tolist()
 # hyperparameters
-epochs = 5000
+epochs = 15000
 # gamma = 0.1
 # epsilon = 0.08
 # decay = 0.1
