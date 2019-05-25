@@ -1,4 +1,6 @@
 import numpy as np
+from pandas import DataFrame
+import time
 
 # Move
 LEFT = 0
@@ -89,14 +91,11 @@ class Environment:
 
     # display environment
     def render(self):
-        for i in range(self.height):
-            for j in range(self.width):
-                if self.pos_y == j and self.pos_x == i:
-                    print("O", end="")
-                elif self.pos_end_y == j and self.pos_end_x == i:
-                    print("T", end="")
-                else:
-                    print(".", end="")
+        new_map = MAPS["6x10"]
+        new_map[self.pos_x][self.pos_y] = "X"
+        print(DataFrame(new_map))
+        print()
+        # time.sleep(0.8)
 
 
 print("")
