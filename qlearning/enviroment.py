@@ -13,10 +13,10 @@ MOUNTAIN = 4
 WATER = 0
 
 # REWARDS
-R_PLAIN = -1
+R_PLAIN = -20
 R_FOREST = -25
 R_MOUNTAIN = -75
-R_WATER = -125
+R_WATER = -500
 
 MAPS = {
     "6x10": [
@@ -55,9 +55,6 @@ class Environment:
 
     # take action
     def step(self, action):
-        # print("\n", action, " ", self.pos_x, self.pos_y)
-
-        # import pdb; pdb.set_trace()
         if action == LEFT:
             self.pos_y = self.pos_y - 1 if self.pos_y > 0 else self.pos_y
         if action == RIGHT:
@@ -66,8 +63,6 @@ class Environment:
             self.pos_x = self.pos_x + 1 if self.pos_x < self.height - 1 else self.pos_x
         if action == UP:
             self.pos_x = self.pos_x - 1 if self.pos_x > 0 else self.pos_x
-            # print("EXITO") if self.pos_x > 0 else print("UPS")
-        # print("\n",self.pos_x, self.pos_y)
 
         done = self.pos_x == self.pos_end_x and self.pos_y == self.pos_end_y
         # mapping (x,y) position to number between 0 and 5x5-1=24
@@ -85,8 +80,8 @@ class Environment:
                 reward = R_MOUNTAIN
             if outside == WATER:
                 reward = R_WATER
-
-        return next_state, reward, done
+        step = [(self.pos_x, self.pos_y), action]
+        return next_state, reward, done, step
 
     # return a random action
     def random_action(self):
@@ -96,10 +91,12 @@ class Environment:
     def render(self):
         for i in range(self.height):
             for j in range(self.width):
-                if self.pos_y == i and self.pos_x == j:
+                if self.pos_y == j and self.pos_x == i:
                     print("O", end="")
-                elif self.pos_end_y == i and self.pos_end_x == j:
+                elif self.pos_end_y == j and self.pos_end_x == i:
                     print("T", end="")
                 else:
                     print(".", end="")
+
+
 print("")
