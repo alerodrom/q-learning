@@ -53,11 +53,5 @@ class HomePageView(TemplateView):
                 [(1, 9), 2],
                 [(0, 9), 2],
             ],
-        }  # result["result"]
-        messages.info(
-            self.request,
-            "Realizado en {} pasos con recompensa de {}".format(
-                context["result"]["steps"], context["result"]["reward"]
-            ),
-        )
+        } 
         return context

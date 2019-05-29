@@ -1,0 +1,348 @@
+/*-----------------------------------------------------------------------------------
+
+	Version: 0.0.1
+
+-----------------------------------------------------------------------------------*/
+/* ----------------------------------------------------------------
+
+	Table Of Content
+		
+    00. Basics
+    01. Navbar
+    02. Loader
+    03. Tables
+    04. Margins
+    05. Animations
+    06. Panel
+    07. Buttons
+    08. Footer
+
+ 
+---------------------------------------------------------------- */
+/* ----------------------------------------------------------------
+	[ 00. Basics ]
+-----------------------------------------------------------------*/
+:root {
+    --primary:      #5d1fbb;
+    --secondary:    #f5c91a;
+    --white:        #FFFFFF;
+    --light:        #efefef;
+    --black:        #000000;
+    --dark:         #333333;
+    --gray:         #868686;
+    --shadow:       rgba(0,0,0,.13);
+
+    --plain:        #b99669;
+    --forest:       #7ce285;
+    --mountain:     #634d30;
+    --water:        #8ebaff;
+}
+body {
+    background: var(--light);
+    font-size: 14px;
+    color: var(--dark);
+}
+h1 {
+    text-align: center;
+    font-size: 50px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--primary);
+    padding: 60px 0px;
+}
+
+/* ----------------------------------------------------------------
+	[ 01. Navbar ]
+-----------------------------------------------------------------*/
+nav {
+    background: var(--primary);
+    border-radius: 3px;
+}
+nav .nav-item {
+    color: var(--light);
+    cursor: pointer;
+}
+nav .nav-item:hover {
+    background: var(--light);
+    color: var(--primary);
+}
+
+/* ----------------------------------------------------------------
+	[ 02. Loader ]
+-----------------------------------------------------------------*/
+.wrapper-loader {
+    text-align: left;
+    margin: 0 auto;
+    background: var(--secondary);
+    padding: 20px;
+    width: 100px;
+    border-radius: 0px 0px 6px 6px;
+    box-shadow: 0px 0px 6px var(--shadow);
+}
+.loader{
+    width: 35px;
+    height: 35px;
+    margin: 0 auto;
+    transform: rotate(-45deg);
+    font-size: 0;
+    line-height: 0;
+    animation: rotate-loader 5s infinite;
+    padding: 5px;
+    border: 1px solid var(--primary);
+}
+.loader .loader-inner{
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 50%;
+}
+.loader .loading{
+    position: absolute;
+    background: var(--primary);
+}
+.loader .one{
+    width: 100%;
+    bottom: 0;
+    height: 0;
+    animation: loading-one 1s infinite;
+}
+.loader .two{
+    width: 0;
+    height: 100%;
+    left: 0;
+    animation: loading-two 1s infinite;
+    animation-delay: 0.25s;
+}
+.loader .three{
+    width: 0;
+    height: 100%;
+    right: 0;
+    animation: loading-two 1s infinite;
+    animation-delay: 0.75s;
+}
+.loader .four{
+    width: 100%;
+    top: 0;
+    height: 0;
+    animation: loading-one 1s infinite;
+    animation-delay: 0.5s;
+}
+@keyframes loading-one {
+    0% {
+        height: 0;
+        opacity: 1;
+    }
+    12.5% {
+        height: 100%;
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        height: 100%;
+        opacity: 0;
+    }
+}
+@keyframes loading-two {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    12.5% {
+        width: 100%;
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 0;
+    }
+}
+@keyframes rotate-loader {
+    0% {
+        transform: rotate(-45deg);
+    }
+    20% {
+        transform: rotate(-45deg);
+    }
+    25% {
+        transform: rotate(-135deg);
+    }
+    45% {
+        transform: rotate(-135deg);
+    }
+    50% {
+        transform: rotate(-225deg);
+    }
+    70% {
+        transform: rotate(-225deg);
+    }
+    75% {
+        transform: rotate(-315deg);
+    }
+    95% {
+        transform: rotate(-315deg);
+    }
+    100% {
+        transform: rotate(-405deg);
+    }
+}
+
+/* ----------------------------------------------------------------
+	[ 03. Tables ]
+-----------------------------------------------------------------*/
+.wrapper-map {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    animation: fadein 2s;
+}
+table.dataframe thead, table.dataframe tbody tr th:first-child {
+    display: none;
+}
+table.dataframe {
+    margin: 0 auto;
+    border: var(--shadow);
+}
+table.dataframe td {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+.s-plain {
+    background: var(--plain);
+    color: var(--plain);
+}
+.s-forest {
+    background: var(--forest);
+    color: var(--forest);
+}
+.s-mountain {
+    background: var(--mountain);
+    color: var(--mountain);
+}
+.s-water {
+    background: var(--water);
+    color: var(--water);
+}
+.s-way {
+    background: var(--secondary);
+    color: var(--dark);
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+/* ----------------------------------------------------------------
+	[ 04. Margins ]
+-----------------------------------------------------------------*/
+.mt-60 {
+    margin-top: 60px;
+}
+
+/* ----------------------------------------------------------------
+	[ 05. Animations ]
+-----------------------------------------------------------------*/
+/**** Pulse ****/
+@keyframes pulse {
+    0% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.7);
+        opacity: 0.85;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/**** Fadein ****/
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+/* ----------------------------------------------------------------
+	[ 06. Panel ]
+-----------------------------------------------------------------*/
+.wrapper-panel-sticky {
+    position: sticky;
+    top: 30px;
+}
+.wrapper-panel {
+    background: var(--primary);
+    color: var(--light);
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 3px;
+}
+    .wrapper-panel .panel-title {
+        font-size: 20px;
+    }
+    .wrapper-panel .panel-body {
+        border-top: 1px solid var(--shadow);
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+        .wrapper-panel .panel-body .block {
+            margin: 10px;
+            font-size: 17px;
+        }
+            .wrapper-panel .panel-body .block i {
+                margin-right: 10px;
+            }
+
+
+/* ----------------------------------------------------------------
+	[ 07. Buttons ]
+-----------------------------------------------------------------*/
+.wrapper-button {
+    margin: 0 auto;
+    max-width: 300px;
+    margin-top: 30px;
+    padding: 15px;
+}
+.button-top {
+    margin: 0 auto;
+    background: var(--secondary);
+    border-radius: 100%;
+    font-size: 18px;
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    text-align: center;
+    color: var(--dark);
+}
+.button-top:hover {
+    color: var(--light);
+    background: var(--dark);
+}
+    .button-top i {
+        vertical-align: middle;
+        line-height: 40px;
+    }
+
+/* ----------------------------------------------------------------
+	[ 08. Footer ]
+-----------------------------------------------------------------*/
+footer {
+    margin-top: 120px;
+    color: var(--gray);
+}
+    footer a {
+        color: inherit;
+    }
+    footer a:hover {
+        color: var(--primary);
+    }

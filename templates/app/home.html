@@ -1,13 +1,41 @@
 {% extends 'app/base.html' %}
 {% load bootstrap4 %}
 
-{% block title %}qlearning_app{% endblock %}
+{% block title %}Q-Learning App{% endblock %}
 
 {% block content %}
-{% for map in maps %}
-<div>
-    {{map|safe}}
-</div>
-{% endfor %}
-{{result}}
+
+    {% include 'app/_loader.html' %}
+    <div class="row">
+        <div class="col-6 mt-60">
+            {% for map in maps %}
+            <div class="wrapper-map">
+                {{map|safe}}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-6 mt-60">
+            <div class="wrapper-panel-sticky">
+                <div id="result-panel" class="wrapper-panel">
+                    <h2 class="panel-title">Resultado</h2>
+                    <div class="panel-body">
+                        <div class="block">
+                                <i class="fas fa-shoe-prints"></i>Pasos:  <b>{{ result.steps }}</b>
+                        </div>
+                        <div class="block">
+                                <i class="fas fa-coins"></i>Recompensa: <b>{{ result.reward }}</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper-button text-right">
+                    <a href="#" class="button-top">
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                </div>
+                {% include 'app/_footer.html' %}
+            </div>
+            
+        </div>
+    </div>
+
 {% endblock %}
