@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}qlearning_app{% endblock %}
+
+{% block content %}
+{% for map in maps %}
+<div>
+    {{map|safe}}
+</div>
+{% endfor %}
+{{result}}
+{% endblock %}

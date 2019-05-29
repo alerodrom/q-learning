@@ -1,11 +1,12 @@
+import os
+import time
 from operator import itemgetter
 
-# from medium_qlearning_env import Env
-from enviroment import Environment, MAPS
-from pandas import DataFrame
 import numpy as np
-import time
-import os
+from pandas import DataFrame
+
+# from medium_qlearning_env import Env
+from qlearning.enviroment import MAPS, Environment
 
 
 class Qlearning:
@@ -38,13 +39,15 @@ class Qlearning:
         self.print_max_reward = print_max_reward
 
     def _render(self, res):
+        maps = list()
         new_map = MAPS["6x10"]
         for step in res["path"]:
             aux = step[0]
             new_map[aux[0]][aux[1]] = "X"
             print(DataFrame(new_map))
+            maps.append(DataFrame(new_map).to_html())
             print()
-        time.sleep(0.8)
+        return maps
 
     def call(self):
         # training loop
@@ -56,11 +59,11 @@ class Qlearning:
             path = []
             while not done:
                 if self.print_steps:
-                    os.system('clear')
+                    os.system("clear")
                     print("epoch #", i + 1, "/", self.epochs)
                     self.env.render()
                     time.sleep(0.5)
-                    os.system('clear')
+                    os.system("clear")
                 # count steps to finish game
                 steps += 1
 
@@ -97,6 +100,9 @@ class Qlearning:
                 key=lambda index: self.epochs_data[index]["reward"],
             )
         ]
+        result = dict()
         if self.print_max_reward:
-            self._render(res)
+            result["maps"] = self._render(res)
+        result["result"] = res
         print(res)
+        return result

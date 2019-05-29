@@ -1,6 +1,7 @@
+import time
+
 import numpy as np
 from pandas import DataFrame
-import time
 
 # Move
 LEFT = 0
