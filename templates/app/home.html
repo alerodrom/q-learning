@@ -1,5 +1,6 @@
 {% extends 'app/base.html' %}
 {% load bootstrap4 %}
+{% load util_tags %}
 
 {% block title %}Q-Learning App{% endblock %}
 
@@ -9,9 +10,13 @@
     <div class="row">
         <div class="col-6 mt-60">
             {% for map in maps %}
-            <div class="wrapper-map">
-                {{map|safe}}
-            </div>
+                {% with result.path|list_item:forloop.counter0 as aux_list %}
+                    <div class="wrapper-map">
+                        {{map|safe}}
+                        <div class="block-move" data-move="{{aux_list.1}}"></div>
+                        
+                    </div>
+                {% endwith %}
             {% endfor %}
         </div>
         <div class="col-6 mt-60">

@@ -43,7 +43,7 @@ class Qlearning:
         new_map = MAPS["6x10"]
         for step in res["path"]:
             aux = step[0]
-            new_map[aux[0]][aux[1]] = "X"
+            new_map[aux[0]][aux[1]] = "X | {}".format(MAPS["6x10"][aux[0]][aux[1]])
             print(DataFrame(new_map))
             maps.append(DataFrame(new_map).to_html())
             print()

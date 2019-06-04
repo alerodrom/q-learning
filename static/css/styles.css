@@ -195,9 +195,9 @@ nav .nav-item:hover {
 	[ 03. Tables ]
 -----------------------------------------------------------------*/
 .wrapper-map {
-    margin-top: 15px;
     margin-bottom: 30px;
     animation: fadein 2s;
+    position: relative;
 }
 table.dataframe thead, table.dataframe tbody tr th:first-child {
     display: none;
@@ -211,7 +211,6 @@ table.dataframe td {
     width: 30px;
     text-align: center;
 }
-
 .s-plain {
     background: var(--plain);
     color: var(--plain);
@@ -228,12 +227,44 @@ table.dataframe td {
     background: var(--water);
     color: var(--water);
 }
-.s-way {
+.s-way::after {
     background: var(--secondary);
     color: var(--dark);
     animation-name: pulse;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    display: block;
+    position: relative;
+    content: '';
+    width: 100%;
+    height: 100%;
+}
+
+.block-move {
+    position: relative;
+    top: 5px;
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 3px;
+    width: fit-content;
+}
+@media (min-width: 768px) {
+    .block-move {
+        left: 15px;
+    }
+}
+@media (min-width: 992px) {
+    .block-move {
+        position: absolute;
+        top: 0px;
+    }
+}
+@media (min-width: 1200px) {
+    .block-move {
+        left: 65px;
+    }
 }
 
 /* ----------------------------------------------------------------
@@ -326,7 +357,7 @@ table.dataframe td {
 }
 .button-top:hover {
     color: var(--light);
-    background: var(--dark);
+    background: var(--primary);
 }
     .button-top i {
         vertical-align: middle;

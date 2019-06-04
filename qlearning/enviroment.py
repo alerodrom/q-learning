@@ -94,8 +94,8 @@ class Environment:
     def render(self):
         new_map = MAPS["6x10"]
         new_map[self.pos_x][self.pos_y] = "X"
-        print(DataFrame(new_map))
-        print()
+        #print(DataFrame(new_map))
+        #print()
         # time.sleep(0.8)
 
 

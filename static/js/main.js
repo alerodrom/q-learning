@@ -23,13 +23,20 @@ $(document).ready(function() {
                     fila.children("td").each(function(index){
 
                         var cuadricula = $(this);
+                        var value = this.innerText;
 
-                        switch( this.innerText ){
+                        if( value.includes('X') ){
+                            trozos = value.split("|");
+                            value = trozos[trozos.length-1].trim();
+                            cuadricula.addClass(way);
+                            this.innerHTML = ""
+                        }
+
+                        switch( value ){
                             case "1": cuadricula.addClass(plain); this.innerText = ""; break;
                             case "2": cuadricula.addClass(forest); this.innerText = ""; break;
                             case "4": cuadricula.addClass(mountain); this.innerText = ""; break;
                             case "0": cuadricula.addClass(water); this.innerText = ""; break;
-                            case "X": cuadricula.addClass(way); this.innerHTML = ""; 
                         }
                         
 
@@ -39,4 +46,29 @@ $(document).ready(function() {
         }
       }); // each tabla
     }
+});
+
+$(document).ready(function() {
+    var icon = "";
+    var value = "";
+
+    if( $('.block-move').length>0 ){
+        $('.block-move').each(function(index){
+            value = $(this).attr("data-move");
+            switch( value ){
+                case '0': icon = '<i class="fas fa-arrow-left"></i>'; break;
+                case '1': icon = '<i class="fas fa-arrow-right"></i>'; break;
+                case '2': icon = '<i class="fas fa-arrow-up"></i>'; break;
+                case '3': icon = '<i class="fas fa-arrow-down"></i>'; break;
+            }
+            //debugger;
+            $(this).append( icon );
+
+        });
+    }
+    
+});
+
+$(".button-top").on('click', function(){
+    $("html").animate({ scrollTop: 0 }, 'medium')
 });
