@@ -1,0 +1,155 @@
+{% extends 'app/base.html' %}
+{% load bootstrap4 %}
+{% load util_tags %}
+
+{% block title %}Q-Learning App{% endblock %}
+
+{% block content %}
+
+    {% include 'app/_loader.html' %}
+    <div class="row">
+        <div class="col-6 mt-60">
+            
+            <div class="wrapper-map">
+                <table border="1" class="create-map">
+                    <thead>
+                        <tr style="text-align: right;">
+                            <th></th>
+                            <th>0</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                            <th>9</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>0</th>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-finish s-plain">1</td>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-plain">1</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-mountain">4</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-mountain">4</td>
+                            <td class="s-mountain">4</td>
+                            <td class="s-mountain">4</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-mountain">4</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                        </tr>
+                        <tr>
+                            <th>5</th>
+                            <td class="s-start s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-plain">1</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-forest">2</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                            <td class="s-water">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+
+            <div class="wrapper-button text-center">
+                    <a href="#" id="finish-map" class="button-primary">
+                        <i class="fas fa-check"></i> Resolver mapa
+                    </a>
+                </div>
+
+
+        </div>
+        <div class="col-6 mt-60">
+            <div class="wrapper-panel-sticky">
+                <div id="result-panel" class="wrapper-panel bg-white">
+                    <h2 class="panel-title">Leyenda</h2>
+                    <div class="panel-body">
+                        <div class="block">
+                            <span class="s-plain s-plain-legend"></span> Tierra
+                        </div>
+                        <div class="block">
+                            <span class="s-forest s-forest-legend"></span> Bosque
+                        </div>
+                        <div class="block">
+                            <span class="s-mountain s-mountain-legend"></span> Montaña
+                        </div>
+                        <div class="block">
+                            <span class="s-water s-water-legend"></span> Agua
+                        </div>
+                        <hr>
+                        <div class="block">
+                            <span class="s-start-legend"></span> Casilla de comienzo <span class="badge badge-light badge-button" data-assign="s-start">Asignar</span>
+                        </div>
+                        <div class="block">
+                            <span class="s-finish-legend"></span> Casilla de fin <span class="badge badge-light badge-button" data-assign="s-finish">Asignar</span>
+                        </div>
+                    </div>
+                </div>
+                {% include 'app/_footer.html' %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}
