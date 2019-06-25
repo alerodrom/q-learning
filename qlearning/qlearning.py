@@ -11,22 +11,24 @@ from qlearning.enviroment import MAPS, Environment
 
 class Qlearning:
     def __init__(
-        self, epochs=5000, init_zeros=True, print_steps=False, print_max_reward=True
+        self,
+        epochs=5000,
+        init_zeros=True,
+        print_steps=False,
+        print_max_reward=True,
+        gamma=0.9,
+        alpha=0.1,
+        base_map=MAPS["6x10"],
+        pos_init=None,
+        pos_end=None,
     ):
-        # create environment
-        self.env = env = Environment()
-
-        # QTable : contains the Q-Values for every (state,action) pair
-        if init_zeros:
-            self.qtable = np.zeros([env.state_count, env.action_count])
-        else:
-            self.qtable = np.random.rand(env.state_count, env.action_count)
 
         # hyperparameters
+        # TODO tiene que ser mayor que 1
         self.epochs = epochs
 
-        self.gamma = 0.9
-        self.alpha = 0.1  # learning rate
+        self.gamma = gamma
+        self.alpha = alpha  # learning rate
 
         self.epsilon = 0.1
         self.max_epsilon = 1.0
@@ -38,15 +40,27 @@ class Qlearning:
         self.print_steps = print_steps
         self.print_max_reward = print_max_reward
 
+        self.base_map = base_map
+
+        # create environment
+        # TODO: pasar posición de inicio y fin
+        self.env = env = Environment(
+            pos_init=pos_init, pos_end=pos_end, base_map=base_map
+        )
+
+        # QTable : contains the Q-Values for every (state,action) pair
+        if init_zeros:
+            self.qtable = np.zeros([env.state_count, env.action_count])
+        else:
+            self.qtable = np.random.rand(env.state_count, env.action_count)
+
     def _render(self, res):
         maps = list()
-        new_map = MAPS["6x10"]
+        new_map = self.base_map
         for step in res["path"]:
             aux = step[0]
-            new_map[aux[0]][aux[1]] = "X | {}".format(MAPS["6x10"][aux[0]][aux[1]])
-            print(DataFrame(new_map))
+            new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
             maps.append(DataFrame(new_map).to_html())
-            print()
         return maps
 
     def call(self):
@@ -104,5 +118,4 @@ class Qlearning:
         if self.print_max_reward:
             result["maps"] = self._render(res)
         result["result"] = res
-        print(res)
         return result

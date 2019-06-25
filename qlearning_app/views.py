@@ -18,10 +18,12 @@ from .models import Result
 class HomePageView(TemplateView):
     template_name = "app/home.html"
 
+
 class CreateMap(CreateView):
     template_name = "app/create_map.html"
     form_class = MapForm
     success_url = "/create-problem/"
+    # TODO comprobar que pos_init y pos_end sean tuplas y este dentro de los límites.
 
 
 class CreateProblem(CreateView):
@@ -32,7 +34,17 @@ class CreateProblem(CreateView):
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.object = form.save()
-        ql = Qlearning(init_zeros=False, print_steps=False)
+
+        aux_map = self.object.map_related.path.split(',')
+        base_map = [aux_map[k : k + 10] for k in range(0, len(aux_map), 10)]
+        ql = Qlearning(
+            init_zeros=self.object.np_zeros,
+            print_steps=False,
+            epochs=self.object.epochs,
+            gamma=self.object.gamma,
+            alpha=self.object.alpha,
+            base_map=base_map,
+        )
         res = ql.call()
         maps = json.dumps(res["maps"], cls=NumpyEncoder)
         path = json.dumps(res["result"]["path"], cls=NumpyEncoder)

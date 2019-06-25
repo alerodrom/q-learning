@@ -34,11 +34,9 @@ MAPS = {
 
 
 class Environment:
-    def __init__(self, pos_init=None, pos_end=None):
-        # comprobar que pos_init y pos_end sean tuplas y este dentro de los límites.
+    def __init__(self, pos_init=None, pos_end=None, base_map=MAPS["6x10"]):
 
-        scene = MAPS["6x10"]
-        self.scene = scene = np.array(scene)
+        self.scene = scene = np.array(base_map)
         self.height, self.width = n_row, n_col = scene.shape
 
         self.pos_init = pos_init if pos_init else (self.height - 1, 0)
@@ -58,7 +56,7 @@ class Environment:
 
     # take action
     def step(self, action):
-        reward = None
+
         if action == LEFT:
             self.pos_y = self.pos_y - 1 if self.pos_y > 0 else self.pos_y
         if action == RIGHT:
@@ -76,13 +74,13 @@ class Environment:
         if done:
             reward = 1000
         else:
-            if outside == PLAIN:
+            if int(outside) == PLAIN:
                 reward = R_PLAIN
-            if outside == FOREST:
+            if int(outside) == FOREST:
                 reward = R_FOREST
-            if outside == MOUNTAIN:
+            if int(outside) == MOUNTAIN:
                 reward = R_MOUNTAIN
-            if outside == WATER:
+            if int(outside) == WATER:
                 reward = R_WATER
         step = [(self.pos_x, self.pos_y), action]
         return next_state, reward, done, step
@@ -95,8 +93,8 @@ class Environment:
     def render(self):
         new_map = MAPS["6x10"]
         new_map[self.pos_x][self.pos_y] = "X"
-        #print(DataFrame(new_map))
-        #print()
+        # print(DataFrame(new_map))
+        # print()
         # time.sleep(0.8)
 
 
