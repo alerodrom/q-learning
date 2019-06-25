@@ -1,5 +1,6 @@
 {% extends 'app/base.html' %}
 {% load bootstrap4 %}
+{% load staticfiles %}
 {% load util_tags %}
 
 {% block title %}Q-Learning App{% endblock %}
@@ -8,47 +9,196 @@
 
     {% include 'app/_loader.html' %}
     <div class="row">
-        <div class="col-6 mt-60">
+        <div class="col-8 mt-60">
             
-            <h2>Instrucciones</h2>
-            <p>
-                <a href="#" data-go="mapa-problema">Mapa del problema</a>
-                <a href="#" data-go="crear-mapa">Crear mapa</a>
-            </p>
+            <h2 class="title">Instrucciones</h2>
+
+            <div id="secciones" class="block-instruction">
+                <h3>Secciones de la aplicación</h3>
+                <p>
+                    En la aplicación podemos navegar a las siguientes secciones, estas se pueden visualizar en el menú principal:
+                    <br>
+                    <ul>
+                        <li>
+                            <b>Instrucciones:</b> es la página actual, el lugar donde poder aprender a utilizar la herramienta desarrollada.
+                        </li>
+                        <li>
+                            <b>Mapa del problema:</b> sección donde poder visualizar el resultado al mapa que aparece en el enunciado de nuestro problema.
+                        </li>
+                        <li>
+                            <b>Crear mapa:</b> lugar en el que se puede editar el mapa por defecto para ejecutar sobre él el algoritmo.
+                        </li>
+                        <li>
+                            <b>Crear problema:</b> sección donde poder seleccionar el mapa, modificar los parámetros que utilizará el algoritmo y lanzar su ejecución para obtener el resultado.
+                        </li>
+                    </ul>
+                    <br>
+                    En la sección inferior, la que podemos considerar como footer, podemos acceder a las siguientes páginas informativas:
+                    <br>
+                    <ul>
+                        <li>
+                            <b>Aviso legal:</b> en la que se expresan pequeños detalles legales a considerar al utilizar la herramienta.
+                        </li>
+                        <li>
+                            <b>Enunciado:</b> enlace que lleva al documento del enunciado del problema.
+                        </li>
+                        <li>
+                            <b>Instrucciones:</b> enlace que lleva a la página actual.
+                        </li>
+                        <li>
+                            <b>Créditos:</b> enlace a la página en la que se recoge el nombre de los autores de la herramienta y, enlaces a webs externas de librerías y repositorios utilizados y/o consultados para la realización del proyecto.
+                        </li>
+                    </ul>
+                </p>
+                <img src="{% static 'images/captura_1.png' %}" >
+            </div>
+                
+            <div id="mapa-problema" class="block-instruction">
+                <h3>Mapa del problema</h3>
+                <p>
+                    En esta página se visualiza el resultado del problema que se describe en nuestro enunciado.
+                </p>
+                <p>
+                    Podemos distinguir dos partes: la parte de resultado visual y la parte de resumen de resultado.
+                    <br>
+                    <ul>
+                        <li>
+                            Resultado visual: resumen con los pasos que sigue el algoritmo para llegar a la casilla final, se muestra el recorrido más óptimo y en el que obtiene la mayor recompensa.
+                        </li>
+                        <li>
+                            Resumen de resultado: se muestra el número de pasos y la recompensa obtenida.
+                        </li>
+                    </ul>
+                    El problema obtiene múltiple soluciones, pero en el resultado final se muestra la mejor solución obtenida.
+                </p>
+                <img src="{% static 'images/captura_1.png' %}" >
+                <h4>Resultado visual</h4>
+                <p>
+                    En el resultado visual, mapas que se visualizan, se pueden distinguir los siguientes elementos:
+                    <ul>
+                        <li>
+                            <b>Flecha de movimiento:</b> es el movimiento actual que realiza el algoritmo (arriba, abajo, izquierda o derecha).
+                        </li>
+                        <li>
+                            <b>Casillas del mapa:</b> el mapa se visualiza con distintos colores:
+                            <ul>
+                                <li>
+                                    Marrón claro: corresponde con zona de llanura.
+                                </li>
+                                <li>
+                                    Verde: corresponde con zona de bosque.
+                                </li>
+                                <li>
+                                    Marrón oscuro: corresponde con zona de montaña.
+                                </li>
+                                <li>
+                                    Celeste: corresponde con zona de agua.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Casilla amarilla:</b> esta casilla, que tiene un efecto de movimiento, indica la posición actual en la que se encuentra el algoritmo.
+                        </li>
+                    </ul>
+                </p>
+                <br>
+                <h4>Resumen del resultado</h4>
+                <p>
+                    En esta parte se muestra:
+                    <ul>
+                        <li>
+                            <b>Pasos:</b> el número de pasos necesarios para que el algoritmo llegue desde la casilla inicial a la final.
+                        </li>
+                        <li>
+                            <b>Recompensa:</b> es la recompensa total que obtiene el algoritmo durante todo su recorrido.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <div id="crear-mapa" class="block-instruction">
+                <h3>Crear mapa</h3>
+                <p>
+                    En esta página se puede crear un mapa personalizado a partir del mapa por defecto.
+                </p>
+                <h4>Personalizar mapa</h4>
+                <p>
+                    Para ello, haciendo click sobre cada casilla, se irán intercambiando los distintos colores, para indicar así qué tipo de zona se establece para cada una.
+                    <br>
+                    El orden de intercambio de colores es el siguiente:
+                    <ol>
+                        <li>Marrón claro.</li>
+                        <li>Verde.</li>
+                        <li>Marrón oscuro.</li>
+                        <li>Celeste.</li>
+                    </ol>
+                    <br>
+                    Cada color se corresponde con una zona determinada, en la leyenda del bloque de ayuda se indica a qué zona corresponde cada color:
+                    <ul>
+                        <li>
+                            Marrón claro: corresponde con zona de llanura.
+                        </li>
+                        <li>
+                            Verde: corresponde con zona de bosque.
+                        </li>
+                        <li>
+                            Marrón oscuro: corresponde con zona de montaña.
+                        </li>
+                        <li>
+                            Celeste: corresponde con zona de agua.
+                        </li>
+                    </ul>
+                </p>
+                <h4>Selección de inicio y fin</h4>
+                <p>
+                    La herramienta también permite establecer el punto inicial y el final, para ello tenemos que realizar lo siguiente:
+                    <ol>
+                        <li>
+                            En el bloque de ayuda, seleccionamos <b>Asignar</b> de la posición deseada. El botón se activa.
+                        </li>
+                        <li>
+                            Con el botón activado, al pulsar ahora sobre una casilla, se establecerá esta como la casilla de comienzo o fin, según lo seleccionado.
+                        </li>
+                    </ol>
+                </p>
+                <h4>Guardar mapa</h4>
+                <p>
+                    Una vez tengamos nuestro mapa personalizado a nuestro gusto, al pulsar en <b>Guardar mapa</b>, nuestro mapa será guardado en la herramienta y seremos redirigidos a la sección de <b>Crear problema</b>.
+                </p>
+                <img src="{% static 'images/captura_2.png' %}" >
+            </div>
+            <div id="crear-problema" class="block-instruction">
+                <h3>Crear problema</h3>
+                <p>
+                    En esta sección es donde podemos seleccionar el mapa, modificar los parámetros que utilizará el algoritmo y lanzar su ejecución para obtener el resultado.
+                </p>
+                <img src="{% static 'images/captura_3.png' %}" >
+            </div>
 
 
 
         </div>
-        <div class="col-6 mt-60">
-            <div class="wrapper-panel-sticky">
-                <div id="result-panel" class="wrapper-panel bg-white">
-                    <h2 class="panel-title">Leyenda</h2>
-                    <div class="panel-body">
-                        <div class="block">
-                            <span class="s-plain s-plain-legend"></span> Tierra
-                        </div>
-                        <div class="block">
-                            <span class="s-forest s-forest-legend"></span> Bosque
-                        </div>
-                        <div class="block">
-                            <span class="s-mountain s-mountain-legend"></span> Montaña
-                        </div>
-                        <div class="block">
-                            <span class="s-water s-water-legend"></span> Agua
-                        </div>
-                        <hr>
-                        <div class="block">
-                            <span class="s-start-legend"></span> Casilla de comienzo <span class="badge badge-light badge-button" data-assign="s-start">Asignar</span>
-                        </div>
-                        <div class="block">
-                            <span class="s-finish-legend"></span> Casilla de fin <span class="badge badge-light badge-button" data-assign="s-finish">Asignar</span>
+        <div class="col-4 mt-60">
+                <div class="wrapper-panel-sticky mt-110">
+                    <div id="result-panel" class="wrapper-panel">
+                        <h2 class="panel-title">Puntos</h2>
+                        <div class="panel-body">
+                            <div class="block instruction-nav">
+                                <a href="#secciones">Secciones de la aplicación</a>
+                                <a href="#mapa-problema">Mapa del problema</a>
+                                <a href="#crear-mapa">Crear mapa</a>
+                                <a href="#crear-problema">Crear problema</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="wrapper-button text-right">
+                        <a href="#" class="button-top">
+                            <i class="fas fa-chevron-up"></i>
+                        </a>
+                    </div>
+                    {% include 'app/_footer.html' %}
                 </div>
-                {% include 'app/_footer.html' %}
+                
             </div>
-            
-        </div>
     </div>
 
 {% endblock %}
