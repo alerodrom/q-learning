@@ -7,6 +7,7 @@ $(document).ready( function() {
 
 $('#finish-map').on('click', function() {
     getMapResult();
+    $('#form-create-map').submit();
 });
 
 // Deshabilitar seleccionar texto con valores del mapa
@@ -60,6 +61,69 @@ function getMapResult() {
             map_result += value + ","
         });
     }
+
+    if(map_result != ""){
+        $("#id_path").val( map_result.substring(0, map_result.length - 1) );
+        getPositionsStartFinish();
+    }
+}
+var init_x = 0;
+var init_y = 0;
+var end_x = 0;
+var end_y = 0;
+
+var y = 0;
+var x = 0;
+
+function getPositionsStartFinish() {
+    if( $('.create-map').length>0 ){
+        $('.create-map').each(function(index) {
+  
+          var tabla = $(this);
+  
+          // recorremos hijos
+          if( tabla.children("tbody").children().length>0) {
+              y = 0;
+
+              tabla.children("tbody").children().each(function(index){
+                  
+                  var fila = $(this);
+                    
+
+                  // recorremos cuadrícula
+                  if( fila.children("td").length>0 ){
+                      x = 0;
+                      fila.children("td").each(function(index){
+                        
+                          var cuadricula = $(this);
+                          if( cuadricula.hasClass('s-finish') ){
+                            end_x = x;
+                            end_y = y;
+                          }
+                          if( cuadricula.hasClass('s-start') ){
+                            init_x = x;
+                            init_y = y;
+                          }
+
+                            // posición x
+                            x++;
+  
+                      }); // each cuadricula
+
+                      // posición y
+                      y++;
+                  }
+              }); // each fila
+          }
+        }); // each tabla
+
+        $("#id_pos_init_x").val( init_x );
+        $("#id_pos_init_y").val( init_y );
+
+        $("#id_pos_end_x").val( end_x );
+        $("#id_pos_end_y").val( end_y );
+
+      }
 }
 
 function removeDataAssign( value ){

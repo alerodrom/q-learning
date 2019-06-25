@@ -111,16 +111,16 @@
 
             </div>
 
-            <form method="post">{% csrf_token %}
+            <form id="form-create-map" method="post">{% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Send message">
             </form>
             
             <div class="wrapper-button text-center">
-                    <a href="#" id="finish-map" class="button-primary">
-                        <i class="fas fa-check"></i> Resolver mapa
-                    </a>
-                </div>
+                <a href="#" id="finish-map" class="button-primary">
+                    <i class="fas fa-check"></i> Resolver mapa
+                </a>
+            </div>
 
 
         </div>

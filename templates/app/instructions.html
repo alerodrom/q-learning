@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+{% load bootstrap4 %}
+{% load util_tags %}
+
+{% block title %}Q-Learning App{% endblock %}
+
+{% block content %}
+
+    {% include 'app/_loader.html' %}
+    <div class="row">
+        <div class="col-6 mt-60">
+            
+            <h2>Instrucciones</h2>
+            <p>
+                <a href="#" data-go="mapa-problema">Mapa del problema</a>
+                <a href="#" data-go="crear-mapa">Crear mapa</a>
+            </p>
+
+
+
+        </div>
+        <div class="col-6 mt-60">
+            <div class="wrapper-panel-sticky">
+                <div id="result-panel" class="wrapper-panel bg-white">
+                    <h2 class="panel-title">Leyenda</h2>
+                    <div class="panel-body">
+                        <div class="block">
+                            <span class="s-plain s-plain-legend"></span> Tierra
+                        </div>
+                        <div class="block">
+                            <span class="s-forest s-forest-legend"></span> Bosque
+                        </div>
+                        <div class="block">
+                            <span class="s-mountain s-mountain-legend"></span> Montaña
+                        </div>
+                        <div class="block">
+                            <span class="s-water s-water-legend"></span> Agua
+                        </div>
+                        <hr>
+                        <div class="block">
+                            <span class="s-start-legend"></span> Casilla de comienzo <span class="badge badge-light badge-button" data-assign="s-start">Asignar</span>
+                        </div>
+                        <div class="block">
+                            <span class="s-finish-legend"></span> Casilla de fin <span class="badge badge-light badge-button" data-assign="s-finish">Asignar</span>
+                        </div>
+                    </div>
+                </div>
+                {% include 'app/_footer.html' %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

@@ -17,6 +17,7 @@
     07. Buttons
     08. Footer
     09. Badge
+    10. Form
 
  
 ---------------------------------------------------------------- */
@@ -214,6 +215,7 @@ table.create-map td {
     height: 30px;
     width: 30px;
     text-align: center;
+    border: 1px solid var(--shadow);
 }
 table.create-map td {
     height: 47px;
@@ -247,11 +249,9 @@ table.create-map td {
     content: '';
     width: 100%;
     height: 100%;
-    top: 10px;
 }
 .create-map .s-start::after, .create-map .s-finish::after {
     padding-top: 20px;
-    cursor: grab;
 }
 .s-way::after, .s-start::after  {
     background: var(--secondary);
@@ -464,4 +464,11 @@ footer {
 }
 .badge-button[data-assign="s-finish"].highlighted {
     background: var(--primary);
+}
+
+/* ----------------------------------------------------------------
+	[ 10. Form ]
+-----------------------------------------------------------------*/
+#form-create-map {
+    display: none;
 }
