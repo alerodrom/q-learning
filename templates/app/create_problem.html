@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+{% load bootstrap4 %}
+{% load util_tags %}
+
+{% block title %}Q-Learning App{% endblock %}
+
+{% block content %}
+
+    {% include 'app/_loader.html' %}
+    <div class="row">
+        <div class="col-6 mt-60">
+            <form method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Send message">
+            </form>
+        </div>
+        <div class="col-6 mt-60">
+            <div class="wrapper-panel-sticky">
+                {% include 'app/_footer.html' %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

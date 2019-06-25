@@ -39,7 +39,7 @@ class Map(TimeStampedModel):
 
 
 class Problem(TimeStampedModel):
-    map_related = models.OneToOneField(Map, on_delete=models.CASCADE)
+    map_related = models.ForeignKey(Map, on_delete=models.CASCADE)
     np_zeros = models.BooleanField(default=True)
     epochs = models.IntegerField(default=50)
     gamma = models.FloatField(default=0.9)

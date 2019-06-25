@@ -2,11 +2,10 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormView
-
+from django.views.generic.edit import CreateView
 
 from qlearning.qlearning import Qlearning
-from .forms import MapForm
+from .forms import MapForm, ProblemForm
 
 
 class HomePageView(TemplateView):
@@ -62,24 +61,12 @@ class HomePageView(TemplateView):
         return context
 
 
-class CreateMap(FormView):
+class CreateMap(CreateView):
     template_name = "app/create_map.html"
     form_class = MapForm
-    success_url = "/thanks/"
+    success_url = "/"
 
-# * Página principal:
-#   - Información del problema
-#   - Autores
-
-# * Creación del problema:
-#   - Formulario para generar el problema
-#   - Formulario para generar el mapa (Opcional, puede seleccionar unos de los establecidos)
-
-# * Creación de mapas:
-#   - Interfaz visual para crear el mapa
-
-# * Ver resultado:
-#   - Visualización del resultado del problema
-
-# * Listado de resultados de problemas
-#   - Ver todos los problemas generados en una lista, viendo los parámetros de lanzamiento y resultados.
+class CreateProblem(CreateView):
+    template_name = "app/create_problem.html"
+    form_class = ProblemForm
+    success_url = "/"
