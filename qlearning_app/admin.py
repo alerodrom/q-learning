@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Map, Problem, Result
+
+admin.site.register(Map)
+admin.site.register(Problem)
+admin.site.register(Result)

@@ -38,7 +38,7 @@ class Environment:
         # comprobar que pos_init y pos_end sean tuplas y este dentro de los límites.
 
         scene = MAPS["6x10"]
-        self.scene = scene = np.array(scene, dtype="int")
+        self.scene = scene = np.array(scene)
         self.height, self.width = n_row, n_col = scene.shape
 
         self.pos_init = pos_init if pos_init else (self.height - 1, 0)
