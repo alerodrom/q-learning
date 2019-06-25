@@ -2,13 +2,12 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+
 
 from qlearning.qlearning import Qlearning
+from .forms import MapForm
 
-class CreateMapView(TemplateView):
-    
-    def create_map(request):
-        return render(request, "app/create_map.html")
 
 class HomePageView(TemplateView):
     template_name = "app/home.html"
@@ -63,7 +62,12 @@ class HomePageView(TemplateView):
         return context
 
 
-# * Página principal: 
+class CreateMap(FormView):
+    template_name = "app/create_map.html"
+    form_class = MapForm
+    success_url = "/thanks/"
+
+# * Página principal:
 #   - Información del problema
 #   - Autores
 
