@@ -16,6 +16,7 @@
     06. Panel
     07. Buttons
     08. Footer
+    09. Badge
 
  
 ---------------------------------------------------------------- */
@@ -199,17 +200,26 @@ nav .nav-item:hover {
     animation: fadein 2s;
     position: relative;
 }
-table.dataframe thead, table.dataframe tbody tr th:first-child {
+table.dataframe thead, table.dataframe tbody tr th:first-child,
+table.create-map thead, table.create-map tbody tr th:first-child {
     display: none;
 }
-table.dataframe {
+table.dataframe,
+table.create-map {
     margin: 0 auto;
     border: var(--shadow);
 }
-table.dataframe td {
+table.dataframe td,
+table.create-map td {
     height: 30px;
     width: 30px;
     text-align: center;
+}
+table.create-map td {
+    height: 47px;
+    width: 50px;
+    padding-top: 5px;
+    cursor: pointer;
 }
 .s-plain {
     background: var(--plain);
@@ -227,8 +237,7 @@ table.dataframe td {
     background: var(--water);
     color: var(--water);
 }
-.s-way::after {
-    background: var(--secondary);
+.s-way::after, .s-start::after, .s-finish::after {
     color: var(--dark);
     animation-name: pulse;
     animation-duration: 1s;
@@ -238,6 +247,35 @@ table.dataframe td {
     content: '';
     width: 100%;
     height: 100%;
+    top: 10px;
+}
+.create-map .s-start::after, .create-map .s-finish::after {
+    padding-top: 20px;
+    cursor: grab;
+}
+.s-way::after, .s-start::after  {
+    background: var(--secondary);
+}
+.s-finish::after {
+    background: var(--primary);
+}
+.create-map .s-way::after, .create-map .s-start::after, .create-map .s-finish::after {
+    top: -14px;
+}
+
+.s-plain-legend, .s-mountain-legend, .s-forest-legend, .s-water-legend,
+.s-start-legend, .s-finish-legend {
+    height: 20px;
+    width: 20px;
+    top: 0px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.s-start-legend {
+    background: var(--secondary);
+} 
+.s-finish-legend {
+    background: var(--primary);
 }
 
 .block-move {
@@ -318,9 +356,17 @@ table.dataframe td {
     padding: 15px;
     border-radius: 3px;
 }
+    .wrapper-panel.bg-white {
+        background: var(--white);
+        color: var(--gray);
+    }
+
     .wrapper-panel .panel-title {
         font-size: 20px;
     }
+        .wrapper-panel.bg-white .panel-title {
+            color: var(--dark);
+        }
     .wrapper-panel .panel-body {
         border-top: 1px solid var(--shadow);
         margin-top: 10px;
@@ -344,21 +390,43 @@ table.dataframe td {
     margin-top: 30px;
     padding: 15px;
 }
-.button-top {
+.button-primary, .button-top {
     margin: 0 auto;
     background: var(--secondary);
-    border-radius: 100%;
     font-size: 18px;
-    width: 40px;
     display: inline-block;
-    height: 40px;
     text-align: center;
     color: var(--dark);
 }
-.button-top:hover {
+.button-primary {
+    border-radius: 100px;
+    padding-left: 0px;
+    padding-right: 15px;
+}
+    .button-primary i {
+        background: var(--light);
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        margin: 5px;
+        font-size: 13px;
+        line-height: 32px !important;
+    }
+        .button-primary:hover i {
+            color: var(--dark);
+        }
+.button-top {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.button-top:hover,
+.button-primary:hover {
     color: var(--light);
     background: var(--primary);
+    text-decoration: none;
 }
+    .button-primary i,
     .button-top i {
         vertical-align: middle;
         line-height: 40px;
@@ -377,3 +445,23 @@ footer {
     footer a:hover {
         color: var(--primary);
     }
+
+/* ----------------------------------------------------------------
+	[ 09. Badge ]
+-----------------------------------------------------------------*/
+.badge {
+    font-weight: normal;
+    color: var(--gray);
+}
+.badge-light {
+    background: var(--light);
+}
+.badge.badge-button {
+    cursor: pointer;
+}
+.badge-button[data-assign="s-start"].highlighted {
+    background: var(--secondary);
+}
+.badge-button[data-assign="s-finish"].highlighted {
+    background: var(--primary);
+}

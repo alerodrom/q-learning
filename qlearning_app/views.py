@@ -5,6 +5,10 @@ from django.views.generic.base import TemplateView
 
 from qlearning.qlearning import Qlearning
 
+class CreateMapView(TemplateView):
+    
+    def create_map(request):
+        return render(request, "app/create_map.html")
 
 class HomePageView(TemplateView):
     template_name = "app/home.html"
