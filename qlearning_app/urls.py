@@ -15,12 +15,11 @@ Including another URLconf
 """
 from django.urls import include, path
 
-from .views import HomePageView, CreateMap, CreateProblem
+from .views import CreateMap, CreateProblem, HomePageView, ResultDetailView
 
-urlpatterns = (
-    [
-        path("", HomePageView.as_view(), name="index"),
-        path("create-map/", CreateMap.as_view(), name="create_map"),
-        path("create-problem/", CreateProblem.as_view(), name="create_problem"),
-    ]
-)
+urlpatterns = [
+    path("", HomePageView.as_view(), name="index"),
+    path("create-map/", CreateMap.as_view(), name="create_map"),
+    path("create-problem/", CreateProblem.as_view(), name="create_problem"),
+    path("result/<int:pk>/", ResultDetailView.as_view(), name="result-detail"),
+]

@@ -1,4 +1,5 @@
-from django.forms import ModelForm, DateInput, TimeInput
+from django.forms import DateInput, ModelForm, TimeInput
+
 from .models import Map, Problem, Result
 
 

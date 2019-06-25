@@ -9,33 +9,41 @@
     {% include 'app/_loader.html' %}
     <div class="row">
         <div class="col-6 mt-60">
-            {% for map in maps %}
-                {% with result.path|list_item:forloop.counter0 as aux_list %}
-                    <div class="wrapper-map">
-                        {{map|safe}}
-                        <div class="block-move" data-move="{{aux_list.1}}"></div>
-                        
-                    </div>
-                {% endwith %}
-            {% endfor %}
+            
+            <h2>Instrucciones</h2>
+            <p>
+                <a href="#" data-go="mapa-problema">Mapa del problema</a>
+                <a href="#" data-go="crear-mapa">Crear mapa</a>
+            </p>
+
+
+
         </div>
         <div class="col-6 mt-60">
             <div class="wrapper-panel-sticky">
-                <div id="result-panel" class="wrapper-panel">
-                    <h2 class="panel-title">Resultado</h2>
+                <div id="result-panel" class="wrapper-panel bg-white">
+                    <h2 class="panel-title">Leyenda</h2>
                     <div class="panel-body">
                         <div class="block">
-                                <i class="fas fa-shoe-prints"></i>Pasos:  <b>{{ result.steps }}</b>
+                            <span class="s-plain s-plain-legend"></span> Tierra
                         </div>
                         <div class="block">
-                                <i class="fas fa-coins"></i>Recompensa: <b>{{ result.reward }}</b>
+                            <span class="s-forest s-forest-legend"></span> Bosque
+                        </div>
+                        <div class="block">
+                            <span class="s-mountain s-mountain-legend"></span> Montaña
+                        </div>
+                        <div class="block">
+                            <span class="s-water s-water-legend"></span> Agua
+                        </div>
+                        <hr>
+                        <div class="block">
+                            <span class="s-start-legend"></span> Casilla de comienzo <span class="badge badge-light badge-button" data-assign="s-start">Asignar</span>
+                        </div>
+                        <div class="block">
+                            <span class="s-finish-legend"></span> Casilla de fin <span class="badge badge-light badge-button" data-assign="s-finish">Asignar</span>
                         </div>
                     </div>
-                </div>
-                <div class="wrapper-button text-right">
-                    <a href="#" class="button-top">
-                        <i class="fas fa-chevron-up"></i>
-                    </a>
                 </div>
                 {% include 'app/_footer.html' %}
             </div>

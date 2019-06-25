@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 from django.core.validators import (
-    MinValueValidator,
-    MinLengthValidator,
     MaxValueValidator,
+    MinLengthValidator,
+    MinValueValidator,
+    RegexValidator,
 )
-from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models import Avg
 
@@ -52,7 +52,7 @@ class Problem(TimeStampedModel):
 
 class Result(TimeStampedModel):
     problem = models.OneToOneField(Problem, on_delete=models.CASCADE)
-    maps = models.CharField(max_length=10000)
+    maps = models.CharField(max_length=100000)
     steps = models.IntegerField()
     reward = models.FloatField()
     path = models.CharField(max_length=10000)

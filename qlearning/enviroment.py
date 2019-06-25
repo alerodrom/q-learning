@@ -58,6 +58,7 @@ class Environment:
 
     # take action
     def step(self, action):
+        reward = None
         if action == LEFT:
             self.pos_y = self.pos_y - 1 if self.pos_y > 0 else self.pos_y
         if action == RIGHT:
