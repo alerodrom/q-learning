@@ -41,7 +41,8 @@ class Qlearning:
         self.print_max_reward = print_max_reward
 
         self.base_map = base_map
-
+        print(pos_init)
+        print(pos_end)
         # create environment
         # TODO: pasar posición de inicio y fin
         self.env = env = Environment(
@@ -72,6 +73,7 @@ class Qlearning:
             reward_count = 0
             path = []
             while not done:
+                print(steps)
                 if self.print_steps:
                     os.system("clear")
                     print("epoch #", i + 1, "/", self.epochs)

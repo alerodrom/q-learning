@@ -37,6 +37,9 @@ class CreateProblem(CreateView):
 
         aux_map = self.object.map_related.path.split(',')
         base_map = [aux_map[k : k + 10] for k in range(0, len(aux_map), 10)]
+        pos_init = (self.object.map_related.pos_init_y, self.object.map_related.pos_init_x)
+        pos_end = (self.object.map_related.pos_end_y, self.object.map_related.pos_end_x)
+
         ql = Qlearning(
             init_zeros=self.object.np_zeros,
             print_steps=False,
@@ -44,6 +47,8 @@ class CreateProblem(CreateView):
             gamma=self.object.gamma,
             alpha=self.object.alpha,
             base_map=base_map,
+            pos_init=pos_init,
+            pos_end=pos_end
         )
         res = ql.call()
         maps = json.dumps(res["maps"], cls=NumpyEncoder)
