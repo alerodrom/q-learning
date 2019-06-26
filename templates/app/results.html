@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load bootstrap4 %}
+{% load util_tags %}
+
+{% block title %}Q-Learning App{% endblock %}
+
+{% block content %}
+
+{% include 'app/_loader.html' %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre del mapa</th>
+                <th scope="col">Épocas</th>
+                <th scope="col">gamma</th>
+                <th scope="col">alpha</th>
+                <th scope="col">Pasos</th>
+                <th scope="col">Recompensa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in object_list %}
+                <tr>
+                    <th scope="row"><a href="{% url 'result-detail' result.id %}">{{result.id}}</a></th>
+                    <td>{{result.problem.map_related.name}}</td>
+                    <td>{{result.problem.epochs}}</td>
+                    <td>{{result.problem.gamma}}</td>
+                    <td>{{result.problem.alpha}}</td>
+                    <td>{{result.steps}}</td>
+                    <td>{{result.reward}}</td>
+                </tr>
+            {% empty %}
+                <p>Aún no hay resultados.</p>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

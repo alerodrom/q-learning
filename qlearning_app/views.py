@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
+
 from pandas import DataFrame
 
 from aux.numpy_encoder import NumpyEncoder
@@ -97,6 +99,10 @@ class CreateProblem(CreateView):
         super().get_success_url()
         return reverse("result-detail", args=[self.object.result.id])
 
+class ResultListView(ListView):
+    template_name = "app/results.html"
+
+    model = Result
 
 class ResultDetailView(DetailView):
     template_name = "app/result.html"
