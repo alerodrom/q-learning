@@ -18,6 +18,7 @@ class TimeStampedModel(models.Model):
 
 
 class Map(TimeStampedModel):
+    name = models.CharField(max_length=120)
     path = models.CharField(max_length=119)
     pos_init_x = models.IntegerField()
     pos_init_y = models.IntegerField()
@@ -36,6 +37,9 @@ class Map(TimeStampedModel):
 
     def width(self):
         return 6
+
+    def __str__(self):
+        return self.name
 
 
 class Problem(TimeStampedModel):

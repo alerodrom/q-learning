@@ -7,12 +7,13 @@ from django.urls import reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from pandas import DataFrame
 
 from aux.numpy_encoder import NumpyEncoder
 from qlearning.qlearning import Qlearning
 
 from .forms import MapForm, ProblemForm
-from .models import Result
+from .models import Result, Map
 
 
 class HomePageView(TemplateView):
@@ -31,13 +32,43 @@ class CreateProblem(CreateView):
     form_class = ProblemForm
     success_url = "/"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data = list()
+        ids = list()
+        for m in Map.objects.all():
+            pos_init = (m.pos_init_y, m.pos_init_x)
+            pos_end = (m.pos_end_y, m.pos_end_x)
+
+            aux_map = m.path.split(",")
+            new_map = base_map = [
+                aux_map[k : k + 10] for k in range(0, len(aux_map), 10)
+            ]
+
+            new_map[pos_init[0]][pos_init[1]] = "I | {}".format(
+                base_map[pos_init[0]][pos_init[1]]
+            )
+            new_map[pos_end[0]][pos_end[1]] = "F | {}".format(
+                base_map[pos_end[0]][pos_end[1]]
+            )
+
+            data.append(DataFrame(base_map).to_html())
+            ids.append(m.id)
+
+        context["maps"] = data
+        context["ids"] = ids
+        return context
+
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.object = form.save()
 
-        aux_map = self.object.map_related.path.split(',')
+        aux_map = self.object.map_related.path.split(",")
         base_map = [aux_map[k : k + 10] for k in range(0, len(aux_map), 10)]
-        pos_init = (self.object.map_related.pos_init_y, self.object.map_related.pos_init_x)
+        pos_init = (
+            self.object.map_related.pos_init_y,
+            self.object.map_related.pos_init_x,
+        )
         pos_end = (self.object.map_related.pos_end_y, self.object.map_related.pos_end_x)
 
         ql = Qlearning(
@@ -48,7 +79,7 @@ class CreateProblem(CreateView):
             alpha=self.object.alpha,
             base_map=base_map,
             pos_init=pos_init,
-            pos_end=pos_end
+            pos_end=pos_end,
         )
         res = ql.call()
         maps = json.dumps(res["maps"], cls=NumpyEncoder)

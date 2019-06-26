@@ -61,6 +61,12 @@ class Qlearning:
         for step in res["path"]:
             aux = step[0]
             new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
+            new_map[self.env.pos_init[0]][self.env.pos_init[1]] = "I | {}".format(
+                self.base_map[self.env.pos_init[0]][self.env.pos_init[1]]
+            )
+            new_map[self.env.pos_end[0]][self.env.pos_end[1]] = "F | {}".format(
+                self.base_map[self.env.pos_end[0]][self.env.pos_end[1]]
+            )
             maps.append(DataFrame(new_map).to_html())
         return maps
 

@@ -16,6 +16,14 @@
         </div>
         <div class="col-6 mt-60">
             <div class="wrapper-panel-sticky">
+                {% for m in maps %}
+                    <div class="wrapper-map">
+                        {{m|safe}}
+                    </div>
+                {% endfor %}
+                {% for m in extra_data %}
+                    {{extra_data.m}}
+                {% endfor %}
                 {% include 'app/_footer.html' %}
             </div>
             
