@@ -49,10 +49,10 @@ class Problem(TimeStampedModel):
         default=50, validators=[MinValueValidator(2), MaxValueValidator(10000)]
     )
     gamma = models.FloatField(
-        default=0.9, validators=[MinValueValidator(0.1), MaxValueValidator(2.0)]
+        default=0.9, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )
     alpha = models.FloatField(
-        default=0.1, validators=[MinValueValidator(0.1), MaxValueValidator(2.0)]
+        default=0.1, validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )
 
     class Meta:

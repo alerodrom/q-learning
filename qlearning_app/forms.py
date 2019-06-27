@@ -16,8 +16,8 @@ class ProblemForm(ModelForm):
         fields = "__all__"
         widgets = {
             "epochs": NumberInput(attrs={"min": 50, "max": 10000}),
-            "gamma": NumberInput(attrs={"min": 0.1, "max": 2.0, "step": ".01"}),
-            "alpha": NumberInput(attrs={"min": 0.1, "max": 2.0, "step": ".01"}),
+            "gamma": NumberInput(attrs={"min": 0.0, "max": 1.0, "step": ".01"}),
+            "alpha": NumberInput(attrs={"min": 0.0, "max": 1.0, "step": ".01"}),
         }
 
 
