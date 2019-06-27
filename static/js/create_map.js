@@ -1,14 +1,29 @@
+/* 
+|   Funciones necesarias para la vista de Crear Mapa 
+*/
+
+/* Variables */
 var map_result = "";
-        
+
+var init_x = 0;
+var init_y = 0;
+var end_x = 0;
+var end_y = 0;
+
+var y = 0;
+var x = 0;
+
+
+/* Al cargar la página cambiamos el label y obtenemos el mapa por defecto */
 $(document).ready( function() {
     if( $('#form-create-map p label').length>0 ){
         $('#form-create-map p label')[0].innerText = "Pon nombre al mapa";
     }
-    // recorremos cuadrícula
     getMapResult();
 
 });
 
+/* Detectamos cuando el usuario termina la creación del mapa */
 $('#finish-map').on('click', function() {
     getMapResult();
     $('#form-create-map').submit();
@@ -20,6 +35,7 @@ $('.create-map').attr('unselectable', 'on').css('user-select', 'none').on('selec
 var data_assign = "";
 var badge_active = "";
 
+/* Detectamos cuando el usuario quiere a añadir la casilla de inicio o fin */
 $('.badge-button').on('click', function() {
     badge_active = this;
     $(this).addClass("highlighted");
@@ -27,6 +43,7 @@ $('.badge-button').on('click', function() {
     removeDataAssign( data_assign );
 });
 
+/* Detectamos los cambios sobre el mapa para pintar las distintas zonas */
 $('.create-map td').on('click', function() {
     var cuadricula = $(this);
 
@@ -46,7 +63,11 @@ $('.create-map td').on('click', function() {
     }
 });
 
-
+/* 
+|   Función que transforma el mapa visual a una cadena de texto,
+|   esta cadena de texto se envía (junto con otros parámetros) al
+|   controlador de backend
+*/
 function getMapResult() {
     map_result = "";
 
@@ -71,14 +92,14 @@ function getMapResult() {
         getPositionsStartFinish();
     }
 }
-var init_x = 0;
-var init_y = 0;
-var end_x = 0;
-var end_y = 0;
 
-var y = 0;
-var x = 0;
 
+
+
+/* 
+|   Función que transforma las posiciones visuales (inicio y fin)
+|   a las coordenadas necesarias en el controlador
+*/
 function getPositionsStartFinish() {
     if( $('.create-map').length>0 ){
         $('.create-map').each(function(index) {
@@ -130,6 +151,10 @@ function getPositionsStartFinish() {
       }
 }
 
+/* 
+|   Función que elimina del mapa la casilla inicial o final 
+|   antes de colocar el nuevo valor
+*/
 function removeDataAssign( value ){
     $('.create-map td.' + value ).removeClass( value );
 }

@@ -1,4 +1,8 @@
-/* Add color to table */
+/* 
+|   Funciones necesarias para la vista de Resultado
+*/
+
+/* Variables */
 var plain = "s-plain"
 var forest = "s-forest"
 var mountain = "s-mountain"
@@ -7,9 +11,13 @@ var way = "s-way"
 var start = "s-start"
 var finish = "s-finish"
 
+/* 
+|   Cuando está cargada la vista con los datos que nos manda backend
+*/
 $(document).ready(function() {
-    hiddenLoader();
-    var showChar = 700;
+    hiddenLoader(); // ocultamos el loader
+
+    /* Recorremos los mapas para pintarlos */
     if( $('.wrapper-map .dataframe').length>0 ){
       $('.wrapper-map .dataframe').each(function(index) {
 
@@ -41,17 +49,15 @@ $(document).ready(function() {
                         
                         trozos = value.split("|");
                         value = trozos[trozos.length-1].trim();
-                       // this.innerHTML = "";
+                        this.innerHTML = "";
 
+                        /* Dependiendo del valor, corresponde con una zona u otra */
                         switch( value ){
                             case "1": cuadricula.addClass(plain); this.innerText = ""; break;
                             case "2": cuadricula.addClass(forest); this.innerText = ""; break;
                             case "4": cuadricula.addClass(mountain); this.innerText = ""; break;
                             case "0": cuadricula.addClass(water); this.innerText = ""; break;
                         }
-
-                        
-                        
 
                     }); // each cuadricula
                 }
@@ -61,6 +67,9 @@ $(document).ready(function() {
     }
 });
 
+/* 
+|   Código para mostrar el movimiento que se realiza en cada paso
+*/
 $(document).ready(function() {
     var icon = "";
     var value = "";
@@ -79,18 +88,25 @@ $(document).ready(function() {
 
         });
     }
-    
 });
 
+/* Detectamos cuando el usuario quiere ir al principio de la página */
 $(".button-top").on('click', function(){
     $("html").animate({ scrollTop: 0 }, 'medium')
 });
 
 
+/*
+|   Función para mostrar el loader
+*/
 function showLoader() {
     $('.wrapper-loader').removeClass("hidden");
     $('.wrapper-loader').addClass("show");
 }
+
+/*
+|   Función para ocultar el loader
+*/
 function hiddenLoader() {
     $('.wrapper-loader').removeClass("show");
     $('.wrapper-loader').addClass("hidden");
