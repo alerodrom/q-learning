@@ -14,7 +14,7 @@
   <meta name="author" content="ENREDA COOPERATIVA">
 
   <title> {% block title %}{% endblock title %}</title>
-  <link rel="icon" href="{% static 'img/favicon.png' %}">  
+  <link rel="icon" href="{% static 'images/favicon.png' %}">  
   <!-- Bootstrap core CSS -->
   {% bootstrap_css %}
 
@@ -33,8 +33,9 @@
 <body>
 
     <div class="container">
-        <div class="col-12">
-            <h1>Q-Learning</h1>
+        <div class="col-12 text-center">
+            <img src="{% static 'images/favicon.png' %}" class="img-logo">
+            <h1 class="main-title">Q-Learning</h1>
         </div>
         {% include 'app/_navbar.html' %}
         {% block content %}(no content){% endblock %}
