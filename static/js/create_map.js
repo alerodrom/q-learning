@@ -1,8 +1,12 @@
 var map_result = "";
         
 $(document).ready( function() {
+    if( $('#form-create-map p label').length>0 ){
+        $('#form-create-map p label')[0].innerText = "Pon nombre al mapa";
+    }
     // recorremos cuadrícula
     getMapResult();
+
 });
 
 $('#finish-map').on('click', function() {

@@ -4,8 +4,11 @@ var forest = "s-forest"
 var mountain = "s-mountain"
 var water = "s-water"
 var way = "s-way"
+var start = "s-start"
+var finish = "s-finish"
 
 $(document).ready(function() {
+    hiddenLoader();
     var showChar = 700;
     if( $('.wrapper-map .dataframe').length>0 ){
       $('.wrapper-map .dataframe').each(function(index) {
@@ -24,13 +27,21 @@ $(document).ready(function() {
 
                         var cuadricula = $(this);
                         var value = this.innerText;
+                        
+                        if( value.includes('I') ){
+                            cuadricula.addClass(start);
+                        }
+                        if( value.includes('F') ){
+                            cuadricula.addClass(finish);
+                        }
 
                         if( value.includes('X') ){
-                            trozos = value.split("|");
-                            value = trozos[trozos.length-1].trim();
                             cuadricula.addClass(way);
-                            this.innerHTML = ""
                         }
+                        
+                        trozos = value.split("|");
+                        value = trozos[trozos.length-1].trim();
+                       // this.innerHTML = "";
 
                         switch( value ){
                             case "1": cuadricula.addClass(plain); this.innerText = ""; break;
@@ -38,6 +49,8 @@ $(document).ready(function() {
                             case "4": cuadricula.addClass(mountain); this.innerText = ""; break;
                             case "0": cuadricula.addClass(water); this.innerText = ""; break;
                         }
+
+                        
                         
 
                     }); // each cuadricula
@@ -72,3 +85,13 @@ $(document).ready(function() {
 $(".button-top").on('click', function(){
     $("html").animate({ scrollTop: 0 }, 'medium')
 });
+
+
+function showLoader() {
+    $('.wrapper-loader').removeClass("hidden");
+    $('.wrapper-loader').addClass("show");
+}
+function hiddenLoader() {
+    $('.wrapper-loader').removeClass("show");
+    $('.wrapper-loader').addClass("hidden");
+}

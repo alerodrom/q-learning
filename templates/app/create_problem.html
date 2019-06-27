@@ -7,27 +7,67 @@
 {% block content %}
 
     {% include 'app/_loader.html' %}
-    <div class="row">
-        <div class="col-6 mt-60">
-            <form method="post">{% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Send message">
-            </form>
-        </div>
-        <div class="col-6 mt-60">
-            <div class="wrapper-panel-sticky">
-                {% for m in maps %}
-                    <div class="wrapper-map">
-                        {{m|safe}}
-                    </div>
-                {% endfor %}
-                {% for m in extra_data %}
-                    {{extra_data.m}}
-                {% endfor %}
-                {% include 'app/_footer.html' %}
+
+    <form id="create-problem" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-6 mt-60">
+                <h2 class="title">Selecciona un mapa</h2>
+                <div class="wrapper-maps-smalls">
+                    {{ form.map_related }}
+                    {% for m in maps %}
+                        <div class="wrapper-map" data-map-id="{{ forloop.counter }}">
+                            {{m|safe}}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            
+            <div class="col-6 mt-110">
+                <div id="result-panel" class="wrapper-panel">
+                    <h2 class="panel-title">Configuración</h2>
+                    <div class="panel-body">
+
+                        <div class="block">
+                            <label class="container-checkbox">
+                                ¿Matriz Q-Table Inicial? {{ form.np_zeros }}<span class="checkmark"></span>
+                                <span class="help">Si está activo, la matriz Q-Table se inicializará con valores a cero.</span>
+                            </label>
+                        </div> 
+                        <div class="block">
+                            <label>Épocas</label>
+                            {{ form.epochs }}
+                        </div>
+                        <div class="block">
+                            <label>
+                                Gamma
+                                <span class="help">Indica la importancia que se le da a los pasos futuros. A más valor menos importancia.</span>
+                            </label>
+                            {{ form.gamma }}
+                        </div>
+                        <div class="block">
+                            <label>
+                                Alpha
+                                <span class="help">Indica el nivel de aleatoriedad del algoritmo. A más valor más aleatorio.</span>
+                            </label>
+                            {{ form.alpha }}
+                        </div>
+                        
+                        <div class="wrapper-button text-center">
+                            <a href="#" id="resolve-map" class="button-primary-invert">
+                                <i class="fas fa-rocket"></i> Resolver mapa
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="wrapper-button text-right">
+                    <a href="#" class="button-top">
+                        <i class="fas fa-chevron-up"></i>
+                    </a>
+                </div>
+                {% include 'app/_footer.html' %}
+                
+            </div>
         </div>
-    </div>
+    </form>
 
 {% endblock %}

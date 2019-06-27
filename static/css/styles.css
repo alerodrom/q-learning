@@ -58,6 +58,15 @@ h2.title {
     color: var(--primary);
 }
 
+.show {
+    display: block;
+    opacity: 1;
+}
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
 /* ----------------------------------------------------------------
 	[ 01. Navbar ]
 -----------------------------------------------------------------*/
@@ -93,6 +102,7 @@ nav .nav-item:hover {
 	[ 02. Loader ]
 -----------------------------------------------------------------*/
 .wrapper-loader {
+    position: absolute;
     text-align: left;
     margin: 0 auto;
     background: var(--secondary);
@@ -100,6 +110,7 @@ nav .nav-item:hover {
     width: 100px;
     border-radius: 0px 0px 6px 6px;
     box-shadow: 0px 0px 6px var(--shadow);
+    left: calc(50% - 75px);
 }
 .loader{
     width: 35px;
@@ -221,6 +232,16 @@ nav .nav-item:hover {
     animation: fadein 2s;
     position: relative;
 }
+.wrapper-maps-smalls {
+    margin-top: 30px;
+}
+    .wrapper-maps-smalls .wrapper-map {
+        width: 48%;
+        display: inline-block;
+    }
+    .wrapper-maps-smalls .wrapper-map .dataframe.selected {
+        border: 2px solid var(--primary);
+    }
 table.dataframe thead, table.dataframe tbody tr th:first-child,
 table.create-map thead, table.create-map tbody tr th:first-child {
     display: none;
@@ -273,8 +294,11 @@ table.create-map td {
 .create-map .s-start::after, .create-map .s-finish::after {
     padding-top: 20px;
 }
-.s-way::after, .s-start::after  {
+.s-way::after  {
     background: var(--secondary);
+}
+.s-start::after  {
+    background: var(--light);
 }
 .s-finish::after {
     background: var(--primary);
@@ -292,7 +316,7 @@ table.create-map td {
     vertical-align: middle;
 }
 .s-start-legend {
-    background: var(--secondary);
+    background: var(--light);
 } 
 .s-finish-legend {
     background: var(--primary);
@@ -325,9 +349,20 @@ table.create-map td {
     }
 }
 
+table.results th {
+    background: var(--light);
+    color: var(--primary);
+}
+
 /* ----------------------------------------------------------------
 	[ 04. Margins ]
 -----------------------------------------------------------------*/
+.mt-20 {
+    margin-top: 20px !important;
+}
+.p-20 {
+    padding: 30px !important;
+}
 .mt-60 {
     margin-top: 60px;
 }
@@ -402,6 +437,12 @@ table.create-map td {
             .wrapper-panel .panel-body .block i {
                 margin-right: 10px;
             }
+    
+        .wrapper-panel .panel-body .help {
+            display: block;
+            font-size: 12px;
+            color: var(--gray);
+        }
 
 
 /* ----------------------------------------------------------------
@@ -413,7 +454,7 @@ table.create-map td {
     margin-top: 30px;
     padding: 15px;
 }
-.button-primary, .button-top {
+.button-primary, .button-top, .button-primary-invert {
     margin: 0 auto;
     background: var(--secondary);
     font-size: 18px;
@@ -421,12 +462,12 @@ table.create-map td {
     text-align: center;
     color: var(--dark);
 }
-.button-primary {
+.button-primary, .button-primary-invert {
     border-radius: 100px;
     padding-left: 0px;
     padding-right: 15px;
 }
-    .button-primary i {
+    .button-primary i, .button-primary-invert i {
         background: var(--light);
         border-radius: 100%;
         height: 30px;
@@ -435,7 +476,10 @@ table.create-map td {
         font-size: 13px;
         line-height: 32px !important;
     }
-        .button-primary:hover i {
+    .button-primary-invert:hover i {
+        background: var(--secondary);
+    }
+        .button-primary:hover i, .button-primary-invert:hover i {
             color: var(--dark);
         }
 .button-top {
@@ -449,8 +493,14 @@ table.create-map td {
     background: var(--primary);
     text-decoration: none;
 }
+.button-primary-invert:hover {
+    color: var(--dark);
+    background: var(--light);
+    text-decoration: none;
+}
     .button-primary i,
-    .button-top i {
+    .button-top i,
+    .button-primary-invert i {
         vertical-align: middle;
         line-height: 40px;
     }
@@ -490,10 +540,101 @@ footer {
 }
 
 /* ----------------------------------------------------------------
-	[ 10. Form ]
+	[ 10. Forms ]
 -----------------------------------------------------------------*/
-#form-create-map {
+#form-create-map label[for="id_pos_init_x"], #form-create-map label[for="id_pos_init_x"] ~ input,
+#form-create-map label[for="id_path"], #form-create-map label[for="id_path"] ~ input,
+#form-create-map label[for="id_pos_init_y"], #form-create-map label[for="id_pos_init_y"] ~ input,
+#form-create-map label[for="id_pos_end_x"], #form-create-map label[for="id_pos_end_x"] ~ input,
+#form-create-map label[for="id_pos_end_y"], #form-create-map label[for="id_pos_end_y"] ~ input,
+input[type="submit"],
+form #id_map_related {
     display: none;
+}
+
+.container-checkbox {
+    position: relative;
+}
+
+form .panel-body .block {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--shadow);
+}
+form .panel-body .block input {
+    background-color: var(--light);
+    border: 0px;
+    outline: none;
+    padding: 0px 5px;
+    border-radius: 3px;
+}
+form#form-create-map p:nth-child(2)  {
+    background: var(--primary);
+    color: var(--light);
+    padding: 10px;
+    border-radius: 3px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+form#form-create-map label {
+    margin-right: 20px
+}
+form#form-create-map input {
+    background-color: var(--light);
+    border: 0px;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--light);
+    border-radius: 3px;
+}
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+    background-color: var(--light);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+    background-color: var(--secondary);
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+    left: 8px;
+    top: 5px;
+    width: 6px;
+    height: 10px;
+    border: solid var(--primary);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 
