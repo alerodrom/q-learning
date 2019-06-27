@@ -61,7 +61,8 @@ class Qlearning:
         cont = 0
         for step in res["path"]:
             aux = step[0]
-            new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
+            if not "X" in self.base_map[aux[0]][aux[1]]:
+                new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
             if cont == 0:
                 new_map[self.env.pos_init[0]][self.env.pos_init[1]] = "I | {}".format(
                     self.base_map[self.env.pos_init[0]][self.env.pos_init[1]]
