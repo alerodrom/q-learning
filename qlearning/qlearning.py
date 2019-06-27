@@ -58,16 +58,19 @@ class Qlearning:
     def _render(self, res):
         maps = list()
         new_map = self.base_map
+        cont = 0
         for step in res["path"]:
             aux = step[0]
             new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
-            new_map[self.env.pos_init[0]][self.env.pos_init[1]] = "I | {}".format(
-                self.base_map[self.env.pos_init[0]][self.env.pos_init[1]]
-            )
-            new_map[self.env.pos_end[0]][self.env.pos_end[1]] = "F | {}".format(
-                self.base_map[self.env.pos_end[0]][self.env.pos_end[1]]
-            )
+            if cont == 0:
+                new_map[self.env.pos_init[0]][self.env.pos_init[1]] = "I | {}".format(
+                    self.base_map[self.env.pos_init[0]][self.env.pos_init[1]]
+                )
+                new_map[self.env.pos_end[0]][self.env.pos_end[1]] = "F | {}".format(
+                    self.base_map[self.env.pos_end[0]][self.env.pos_end[1]]
+                )
             maps.append(DataFrame(new_map).to_html())
+            cont += 1
         return maps
 
     def call(self):
@@ -79,7 +82,6 @@ class Qlearning:
             reward_count = 0
             path = []
             while not done:
-                print(steps)
                 if self.print_steps:
                     os.system("clear")
                     print("epoch #", i + 1, "/", self.epochs)
