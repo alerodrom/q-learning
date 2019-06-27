@@ -45,9 +45,15 @@ class Map(TimeStampedModel):
 class Problem(TimeStampedModel):
     map_related = models.ForeignKey(Map, on_delete=models.CASCADE)
     np_zeros = models.BooleanField(default=True)
-    epochs = models.IntegerField(default=50)
-    gamma = models.FloatField(default=0.9)
-    alpha = models.FloatField(default=0.1)
+    epochs = models.IntegerField(
+        default=50, validators=[MinValueValidator(2), MaxValueValidator(10000)]
+    )
+    gamma = models.FloatField(
+        default=0.9, validators=[MinValueValidator(0.1), MaxValueValidator(2.0)]
+    )
+    alpha = models.FloatField(
+        default=0.1, validators=[MinValueValidator(0.1), MaxValueValidator(2.0)]
+    )
 
     class Meta:
         verbose_name = "problem"

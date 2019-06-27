@@ -1,4 +1,5 @@
 from django.forms import DateInput, ModelForm, TimeInput
+from django.forms.widgets import NumberInput
 
 from .models import Map, Problem, Result
 
@@ -13,6 +14,11 @@ class ProblemForm(ModelForm):
     class Meta:
         model = Problem
         fields = "__all__"
+        widgets = {
+            "epochs": NumberInput(attrs={"min": 50, "max": 10000}),
+            "gamma": NumberInput(attrs={"min": 0.1, "max": 2.0, "step": ".01"}),
+            "alpha": NumberInput(attrs={"min": 0.1, "max": 2.0, "step": ".01"}),
+        }
 
 
 class ResultForm(ModelForm):
