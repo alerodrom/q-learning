@@ -21,6 +21,7 @@
                         <th scope="col">Épocas</th>
                         <th scope="col">gamma</th>
                         <th scope="col">alpha</th>
+                        <th scope="col">¿Matriz iniciada a 0?</th>
                         <th scope="col">Pasos</th>
                         <th scope="col">Recompensa</th>
                         <th></th>
@@ -34,6 +35,13 @@
                             <td>{{result.problem.epochs}}</td>
                             <td>{{result.problem.gamma}}</td>
                             <td>{{result.problem.alpha}}</td>
+                            <td>
+                                {% if result.problem.np_zeros %}
+                                    Sí
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </td>
                             <td>{{result.steps}}</td>
                             <td>{{result.reward}}</td>
                             <td><a class="button-top" href="{% url 'result-detail' result.id %}"><i class="fas fa-eye"></i></a></td>
