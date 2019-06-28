@@ -23,81 +23,19 @@
                             <b>Instrucciones:</b> es la página actual, el lugar donde poder aprender a utilizar la herramienta desarrollada.
                         </li>
                         <li>
-                            <b>Mapa del problema:</b> sección donde poder visualizar el resultado al mapa que aparece en el enunciado de nuestro problema.
-                        </li>
-                        <li>
-                            <b>Crear mapa:</b> lugar en el que se puede editar el mapa por defecto para ejecutar sobre él el algoritmo.
+                            <b>Crear mapa:</b> lugar en el que se puede editar el mapa por defecto y guardarlo para poder ejecutar sobre él el algoritmo.
                         </li>
                         <li>
                             <b>Crear problema:</b> sección donde poder seleccionar el mapa, modificar los parámetros que utilizará el algoritmo y lanzar su ejecución para obtener el resultado.
+                        </li>
+                        <li>
+                            <b>Resultados:</b> página que proporciona un listado de los diferentes resultados obtenidos.
                         </li>
                     </ul>
                 </p>
                 <img src="{% static 'images/captura_1.png' %}" >
             </div>
                 
-            <div id="mapa-problema" class="block-instruction">
-                <h3>Mapa del problema</h3>
-                <p>
-                    En esta página se visualiza el resultado del problema que se describe en nuestro enunciado.
-                </p>
-                <p>
-                    Podemos distinguir dos partes: la parte de resultado visual y la parte de resumen de resultado.
-                    <br>
-                    <ul>
-                        <li>
-                            Resultado visual: resumen con los pasos que sigue el algoritmo para llegar a la casilla final, se muestra el recorrido más óptimo y en el que obtiene la mayor recompensa.
-                        </li>
-                        <li>
-                            Resumen de resultado: se muestra el número de pasos y la recompensa obtenida.
-                        </li>
-                    </ul>
-                    El problema obtiene múltiple soluciones, pero en el resultado final se muestra la mejor solución obtenida.
-                </p>
-                <img src="{% static 'images/captura_1.png' %}" >
-                <h4>Resultado visual</h4>
-                <p>
-                    En el resultado visual, mapas que se visualizan, se pueden distinguir los siguientes elementos:
-                    <ul>
-                        <li>
-                            <b>Flecha de movimiento:</b> es el movimiento actual que realiza el algoritmo (arriba, abajo, izquierda o derecha).
-                        </li>
-                        <li>
-                            <b>Casillas del mapa:</b> el mapa se visualiza con distintos colores:
-                            <ul>
-                                <li>
-                                    Marrón claro: corresponde con zona de llanura.
-                                </li>
-                                <li>
-                                    Verde: corresponde con zona de bosque.
-                                </li>
-                                <li>
-                                    Marrón oscuro: corresponde con zona de montaña.
-                                </li>
-                                <li>
-                                    Celeste: corresponde con zona de agua.
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <b>Casilla amarilla:</b> esta casilla, que tiene un efecto de movimiento, indica la posición actual en la que se encuentra el algoritmo.
-                        </li>
-                    </ul>
-                </p>
-                <br>
-                <h4>Resumen del resultado</h4>
-                <p>
-                    En esta parte se muestra:
-                    <ul>
-                        <li>
-                            <b>Pasos:</b> el número de pasos necesarios para que el algoritmo llegue desde la casilla inicial a la final.
-                        </li>
-                        <li>
-                            <b>Recompensa:</b> es la recompensa total que obtiene el algoritmo durante todo su recorrido.
-                        </li>
-                    </ul>
-                </p>
-            </div>
             <div id="crear-mapa" class="block-instruction">
                 <h3>Crear mapa</h3>
                 <p>
@@ -145,16 +83,109 @@
                 </p>
                 <h4>Guardar mapa</h4>
                 <p>
-                    Una vez tengamos nuestro mapa personalizado a nuestro gusto, al pulsar en <b>Guardar mapa</b>, nuestro mapa será guardado en la herramienta y seremos redirigidos a la sección de <b>Crear problema</b>.
+                    Una vez tengamos nuestro mapa personalizado a nuestro gusto y le hayamos puesto un nombre, al pulsar en <b>Guardar mapa</b>, nuestro mapa será guardado en la herramienta y seremos redirigidos a la sección de <b>Crear problema</b>.
                 </p>
                 <img src="{% static 'images/captura_2.png' %}" >
             </div>
+
+
             <div id="crear-problema" class="block-instruction">
                 <h3>Crear problema</h3>
                 <p>
                     En esta sección es donde podemos seleccionar el mapa, modificar los parámetros que utilizará el algoritmo y lanzar su ejecución para obtener el resultado.
+                    <br>
+                    Cuando el algoritmo haya terminado, se visualizará el resultado en la página de <b>visualizar mapa</b>.
                 </p>
                 <img src="{% static 'images/captura_3.png' %}" >
+            </div>
+
+
+            <div id="visualizar-resultado" class="block-instruction">
+                <h3>Visualizar resultado</h3>
+                <p>
+                    En esta página se visualiza el resultado del problema que se ha ejecutado.
+                </p>
+                <p>
+                    Podemos distinguir dos partes: la parte de resultado visual y la parte de resumen de resultado.
+                    <br>
+                    <ul>
+                        <li>
+                            Resultado visual: resumen con los pasos que sigue el algoritmo para llegar a la casilla final, se muestra el recorrido más óptimo y en el que obtiene la mayor recompensa.
+                        </li>
+                        <li>
+                            Resumen de resultado: se muestra el número de pasos y la recompensa obtenida.
+                        </li>
+                    </ul>
+                    El problema obtiene múltiple soluciones, pero en el resultado final se muestra la mejor solución obtenida.
+                </p>
+                <img src="{% static 'images/captura_4.png' %}" >
+                <h4>Resultado visual</h4>
+                <p>
+                    En el resultado visual, mapas que se visualizan, se pueden distinguir los siguientes elementos:
+                    <ul>
+                        <li>
+                            <b>Flecha de movimiento:</b> es el movimiento actual que realiza el algoritmo (arriba, abajo, izquierda o derecha).
+                        </li>
+                        <li>
+                            <b>Casillas del mapa:</b> el mapa se visualiza con distintos colores:
+                            <ul>
+                                <li>
+                                    Marrón claro: corresponde con zona de llanura.
+                                </li>
+                                <li>
+                                    Verde: corresponde con zona de bosque.
+                                </li>
+                                <li>
+                                    Marrón oscuro: corresponde con zona de montaña.
+                                </li>
+                                <li>
+                                    Celeste: corresponde con zona de agua.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Casilla gris claro:</b> esta casilla indica la posición de inicio del algoritmo.
+                        </li>
+                        <li>
+                            <b>Casilla morada:</b> esta casilla indica la posición de fin del algoritmo.
+                        </li>
+                        <li>
+                            <b>Casilla amarilla:</b> esta casilla, que tiene un efecto de movimiento, indica la posición actual en la que se encuentra el algoritmo.
+                        </li>
+                    </ul>
+                </p>
+                <br>
+                <h4>Resumen del resultado</h4>
+                <p>
+                    En esta parte se muestra:
+                    <ul>
+                        <li>
+                            <b>Pasos:</b> el número de pasos necesarios para que el algoritmo llegue desde la casilla inicial a la final.
+                        </li>
+                        <li>
+                            <b>Recompensa:</b> es la recompensa total que obtiene el algoritmo durante todo su recorrido.
+                        </li>
+                    </ul>
+                </p>
+            </div>
+
+
+            <div id="pagina-resultados" class="block-instruction">
+                <h3>Página de resultados</h3>
+                <p>
+                    En esta página se visualiza una tabla con los resultados que se han obtenido en la ejecución de cada problema.<br>
+                    En la tabla podemos distinguir los siguientes valores:
+                    <ul>
+                        <li><b>Nombre del mapa:</b> nombre del mapa sobre el que se ha ejecutado el algoritmo.</li>
+                        <li><b>Épocas:</b> número de épocas elegidas.</li>
+                        <li><b>gamma:</b> valor de la variable gamma.</li>
+                        <li><b>alpha:</b> valor de la variable alpha.</li>
+                        <li><b>Pasos:</b> número de pasos que emplea el algoritmo para encontrar la solución.</li>
+                        <li><b>Recompensa:</b> recompensa máxima que obtiene el algoritmo al encontrar la solución.</li>
+                        <li><b>Icono ojo:</b> es un enlace para visualizar el resultado que obtuvo el algoritmo.</li>
+                    </ul>
+                </p>
+                <img src="{% static 'images/captura_5.png' %}" >
             </div>
 
 
@@ -167,9 +198,10 @@
                     <div class="panel-body">
                         <div class="block instruction-nav">
                             <a href="#secciones">Secciones de la aplicación</a>
-                            <a href="#mapa-problema">Mapa del problema</a>
                             <a href="#crear-mapa">Crear mapa</a>
                             <a href="#crear-problema">Crear problema</a>
+                            <a href="#visualizar-resultado">visualizar resultado</a>
+                            <a href="#pagina-resultados">Página de resultados</a>
                         </div>
                     </div>
                 </div>

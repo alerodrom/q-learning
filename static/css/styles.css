@@ -106,6 +106,9 @@ nav .nav-item:hover {
         color: var(--gray);
         text-decoration: none;
     }
+.navbar-toggler-icon {
+    color: var(--light);
+}
 /* ----------------------------------------------------------------
 	[ 02. Loader ]
 -----------------------------------------------------------------*/
