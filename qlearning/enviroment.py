@@ -3,24 +3,25 @@ import time
 import numpy as np
 from pandas import DataFrame
 
-# Move
+# Movimientos
 LEFT = 0
 RIGHT = 1
 UP = 2
 DOWN = 3
 
-# Outside
+# Escenario
 PLAIN = 1
 FOREST = 2
 MOUNTAIN = 4
 WATER = 0
 
-# REWARDS
+# Recompensas
 R_PLAIN = -20
 R_FOREST = -25
 R_MOUNTAIN = -75
 R_WATER = -500
 
+# Mapa
 MAPS = {
     "6x10": [
         [1, 1, 1, 1, 1, 1, 1, 0, 0, 1],
@@ -36,6 +37,7 @@ MAPS = {
 class Environment:
     def __init__(self, pos_init=None, pos_end=None, base_map=MAPS["6x10"]):
 
+        # Escena
         self.scene = scene = np.array(base_map)
         self.height, self.width = n_row, n_col = scene.shape
 
@@ -54,7 +56,6 @@ class Environment:
         self.pos_x, self.pos_y = self.pos_init
         return 0, 0, self.done
 
-    # take action
     def step(self, action):
 
         if action == LEFT:
@@ -67,7 +68,7 @@ class Environment:
             self.pos_x = self.pos_x - 1 if self.pos_x > 0 else self.pos_x
 
         done = self.pos_x == self.pos_end_x and self.pos_y == self.pos_end_y
-        # mapping (x,y) position to number between 0 and 5x5-1=24
+
         next_state = self.height * self.pos_x + self.pos_y
 
         outside = self.scene[self.pos_x][self.pos_y]
@@ -85,16 +86,14 @@ class Environment:
         step = [(self.pos_x, self.pos_y), action]
         return next_state, reward, done, step
 
-    # return a random action
     def random_action(self):
         return np.random.choice(self.actions)
 
-    # display environment
     def render(self):
         new_map = MAPS["6x10"]
         new_map[self.pos_x][self.pos_y] = "X"
-        # print(DataFrame(new_map))
-        # print()
+        print(DataFrame(new_map))
+        print()
         # time.sleep(0.8)
 
 

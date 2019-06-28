@@ -5,7 +5,6 @@ from operator import itemgetter
 import numpy as np
 from pandas import DataFrame
 
-# from medium_qlearning_env import Env
 from qlearning.enviroment import MAPS, Environment
 
 
@@ -23,17 +22,16 @@ class Qlearning:
         pos_end=None,
     ):
 
-        # hyperparameters
-        # TODO tiene que ser mayor que 1
+        # Número de épocas
         self.epochs = epochs
-
+        # Tasa de recompensa a corto plazo
         self.gamma = gamma
-        self.alpha = alpha  # learning rate
-
+        # Tasa de aprendizaje
+        self.alpha = alpha
+        # Tasa de aleatoriedad
         self.epsilon = 0.1
         self.max_epsilon = 1.0
         self.min_epsilon = 0.01
-        self.decay_rate = 0.01
 
         self.epochs_data = dict()
 
@@ -41,15 +39,12 @@ class Qlearning:
         self.print_max_reward = print_max_reward
 
         self.base_map = base_map
-        print(pos_init)
-        print(pos_end)
-        # create environment
-        # TODO: pasar posición de inicio y fin
+
         self.env = env = Environment(
             pos_init=pos_init, pos_end=pos_end, base_map=base_map
         )
 
-        # QTable : contains the Q-Values for every (state,action) pair
+        # qtable: continene los valores para cada pareja de estado y acción
         if init_zeros:
             self.qtable = np.zeros([env.state_count, env.action_count])
         else:
@@ -62,22 +57,25 @@ class Qlearning:
         for step in res["path"]:
             aux = step[0]
             if not "X" in self.base_map[aux[0]][aux[1]]:
+                # Añade por donde esta pasando el algoritmo
                 new_map[aux[0]][aux[1]] = "X | {}".format(self.base_map[aux[0]][aux[1]])
             if cont == 0:
+                # Añade la posición de inicio y fin al mapa
                 new_map[self.env.pos_init[0]][self.env.pos_init[1]] = "I | {}".format(
                     self.base_map[self.env.pos_init[0]][self.env.pos_init[1]]
                 )
                 new_map[self.env.pos_end[0]][self.env.pos_end[1]] = "F | {}".format(
                     self.base_map[self.env.pos_end[0]][self.env.pos_end[1]]
                 )
+            # Almacena los mapas generados para cada paso
             maps.append(DataFrame(new_map).to_html())
             cont += 1
         return maps
 
     def call(self):
-        # training loop
+        # Entrenamiento
         for i in range(self.epochs):
-
+            # Iniciamos el problema
             state, reward, done = self.env.reset()
             steps = 0
             reward_count = 0
@@ -89,36 +87,39 @@ class Qlearning:
                     self.env.render()
                     time.sleep(0.5)
                     os.system("clear")
-                # count steps to finish game
+
+                # Contamos los pasos
                 steps += 1
 
-                # act randomly sometimes to allow exploration
+                # Actualizamos aleatoriamente las acciones, si no cogemos la acción máxima de qtable
                 if np.random.uniform() < self.epsilon:
                     action = self.env.random_action()
-                # if not select max action in Qtable (act greedy)
                 else:
                     action = np.argmax(self.qtable[state])
 
-                # take action
+                # Proxima acción
                 next_state, reward, done, step = self.env.step(action)
 
-                # update qtable value with Bellman equation
-                # qtable[state][action] = reward + gamma * max(qtable[next_state])
+                # Actualizamos el valor de qtable con la ecuación de Bellman
                 next_max = np.max(self.qtable[next_state])
 
                 self.qtable[state, action] = self.qtable[state, action] + self.alpha * (
                     reward + self.gamma * next_max - self.qtable[state, action]
                 )
+                # Acumulamos la recompensa
                 reward_count += reward
-                # update state
+                # Actualizamos el estado
                 state = next_state
+                # Añadimos el paso que se ha dado a path
                 path.append(step)
-            # The more we learn, the less we take random actions
+            # Mientras más se aprende menos acciones aleatorias vamos a ir tomando
             self.epsilon = self.min_epsilon + (
                 self.max_epsilon - self.min_epsilon
             ) * np.exp(-0.1 * self.epsilon)
+            # Añadimos al diccioario general los pasos, recomensa y camino seguidos en esta época
             self.epochs_data[i] = {"steps": steps, "reward": reward_count, "path": path}
 
+        # Nos quedamos con la época que mayor recompensa tenga
         res = self.epochs_data[
             max(
                 range(len(self.epochs_data)),
