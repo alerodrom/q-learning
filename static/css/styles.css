@@ -67,6 +67,14 @@ h2.title {
     opacity: 0;
 }
 
+.main-title {
+    display: inline-block;
+    vertical-align: middle;
+}
+.img-logo {
+    height: 100px;;
+}
+
 /* ----------------------------------------------------------------
 	[ 01. Navbar ]
 -----------------------------------------------------------------*/
@@ -236,9 +244,13 @@ nav .nav-item:hover {
     margin-top: 30px;
 }
     .wrapper-maps-smalls .wrapper-map {
-        width: 48%;
+        width: 258px;
+        margin-right: 10px;
         display: inline-block;
     }
+        .wrapper-maps-smalls .wrapper-map td {
+            height: 25px;
+        }
     .wrapper-maps-smalls .wrapper-map .dataframe.selected {
         border: 2px solid var(--primary);
     }
@@ -510,6 +522,7 @@ table.results th {
 -----------------------------------------------------------------*/
 footer {
     margin-top: 120px;
+    margin-bottom: 30px;
     color: var(--gray);
 }
     footer a {
